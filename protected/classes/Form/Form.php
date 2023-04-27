@@ -11,14 +11,11 @@ class Form extends \HtmlElement
     /** @var FormElement[] $formElements Array des inputs du formumlaire. */
     private Array $formElements;
 
-    /** @var string $titre Titre du formulaire. */
-    private string $titre;
     #endregion
 
     #region --- Constructeur ------------------------
-    public function __construct( string $titre )
+    public function __construct()
     {
-        $this->titre    = $titre;
         $this->formElements   = [];
     }
     #endregion
@@ -28,7 +25,7 @@ class Form extends \HtmlElement
      * Permet l'ajout d'un input au formulaire.
      * @param Input $input Le input à ajouter
      */
-    public function addInput( Input $formElement )
+    public function addElement( FormElement $formElement )
     {
         array_push( $this->formElements, $formElement );
     }

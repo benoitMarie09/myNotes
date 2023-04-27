@@ -13,7 +13,7 @@ class SelectNote extends Select
     #endregion
 
     # region --- Constructeur -------------------------
-    public function __construct( string $name, mixed $value, string $label )
+    public function __construct( string $name, string $label, mixed $value )
     {
         self::$tableNote = new \TableNote();
         $options = [];
@@ -21,7 +21,7 @@ class SelectNote extends Select
         {
             array_push( $options, $note->titre );
         };
-        parent::__construct( $name, $value, $label, $options );
+        parent::__construct( $name, $label, $value, $options );
     }
     #endregion
 

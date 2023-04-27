@@ -15,9 +15,9 @@ class Select extends FormElement
 
 
     #region --- Constructeur ---------------------
-    public function __construct( string $name, mixed $value, string $label, array $options )
+    public function __construct( string $name, string $label, mixed $value, array $options )
     {
-        parent::__construct(  $name, $value, $label );
+        parent::__construct(  $name, $label, $value );
         $this->options = $options;
 
     }
