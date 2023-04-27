@@ -25,15 +25,13 @@ spl_autoload_register( function ( $class ) {
 #endregion
 #region === Router ===================================================
 $page = $_REQUEST['page'] ?? 'accueil' ;
-if (! file_exists(  "./pages/$page.php" )){
+if (! file_exists(  "protected/pages/$page.php" )){
     echo "404 page non trouvée";
 }
 else{
-    include( "./pages/$page.php");
+    include( "protected/pages/$page.php");
 };
 #endregion
-?>
-
 ?>
 
 </body>

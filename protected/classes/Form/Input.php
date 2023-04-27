@@ -16,9 +16,9 @@ class Input extends FormElement
     #endregion
 
     #region --- Constructeur ------------------------
-    public function __construct( $name, $value, $label, $type, $readonly = false, $placeholder = '' )
+    public function __construct( $name, $label, $value, $type, $readonly = false, $placeholder = '' )
     {
-        parent::__construct( $name, $value, $label );
+        parent::__construct( $name, $label, $value );
         $this->type         = $type;
         $this->readonly     = $readonly;
         $this->placeHolder  = $placeholder;
@@ -28,14 +28,14 @@ class Input extends FormElement
     #region --- Methodes ---------------------------
     public function rendre( $nivIndent )
     {
-        $html =  self::indente( $nivIndent )."<label for=\"$this->label\"></label>"
-                .self::indente( $nivIndent )."<input 
-                    type=\"$this->type\" 
-                    name=\"$this->name\" 
-                    id=\"$this->name\" 
-                    placeholder=\"$this->placeHolder\""
-                . $this->readonly ?? 'readonly'              
-                .">";
+        $html =  self::indente( $nivIndent )."<label for=\"$this->label\">$this->label</label>"
+                .self::indente( $nivIndent )."<input class=\"form-control\" "
+                    ." type=\"$this->type\""
+                    ." name=\"$this->name\"" 
+                    ." id=\"$this->name\""
+                    ." placeholder=\"$this->placeHolder\""
+                    . $this->readonly ?? ' readonly';        
+        $html .= ">";
         return $html;
 
     }
