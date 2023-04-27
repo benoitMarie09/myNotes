@@ -6,11 +6,8 @@
 class TableNote
 {
     #region --- Attributs ----------------------------
-    // config de la base de donnée
-    const BDD_SERVEUR = '127.0.0.1';
-    const BDD_USER = 'ben';
-    const BDD_PASS = 'ben';
-    const BDD_BASE = 'prise_note';
+    /** @var Config $config Config de la base de données */
+    private static Config $config;
     /** @var PDO Connexion à la base de donnée. */
     private static PDO $db;
     /** @var string Table de la base de donnée. */
@@ -19,15 +16,16 @@ class TableNote
     #region --- Constructeur -------------------------
     public function __construct()
     {
+        self::$config = new Config();
         try 
         {
-            $conx = 'mysql:host=' . self::BDD_SERVEUR . '; dbname=' . self::BDD_BASE . ';';
-            self::$db = new PDO( $conx, self::BDD_USER, self::BDD_PASS );
+            $conx = 'mysql:host=' . self::$config::BDD_SERVEUR . '; dbname=' . self::$config::BDD_BASE . ';';
+            self::$db = new PDO( $conx, self::$config::BDD_USER, self::$config::BDD_PASS );
             self::$db->query("SET lc_time_names = 'fr_FR';");
         }
         catch ( PDOException $e ) 
         {
-            echo "Erreur à l'ouverture de la base de données <b>" . self::BDD_BASE . "</b>:<br>"
+            echo "Erreur à l'ouverture de la base de données <b>" . self::$config::BDD_BASE . "</b>:<br>"
                 , $e->getMessage();
         }
     }
