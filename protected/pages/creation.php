@@ -1,7 +1,9 @@
 <?php
+use Form\InputNoteId;
 use Form\TextArea;
 
 $form = new Form\Form();
+$form->addElement( new Form\InputNoteId() );
 $form->addElement( new Form\Input( 
     name : 'titre',
     label : 'Titre',
