@@ -32,13 +32,15 @@ class Form extends \HtmlElement
 
     public function rendre( $nivIndent )
     {
-        $html = self::indente( $nivIndent ).'<form action="index.php" method="post">';
+        $html = self::indente( $nivIndent ).'<div class="container mt-3">';
+        $html .= self::indente( $nivIndent + 1 ).'<form action="index.php" method="post">';
         foreach( $this->formElements as $formElement )
         {
-            $html .= $formElement->rendre( $nivIndent + 1 );
+            $html .= $formElement->rendre( $nivIndent + 2 );
         }    
-        $html .= self::indente( $nivIndent ).'</form>';
-
+        $html .= self::indente( $nivIndent + 2 ).'<button type="submit" class="btn btn-primary">Créer</button>';
+        $html .= self::indente( $nivIndent + 1 ).'</form>';
+        $html .= self::indente( $nivIndent ).'</div>';
         return $html;
     }
     #endregion

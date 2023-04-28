@@ -28,14 +28,17 @@ class Input extends FormElement
     #region --- Methodes ---------------------------
     public function rendre( $nivIndent )
     {
-        $html =  self::indente( $nivIndent )."<label for=\"$this->label\">$this->label</label>"
-                .self::indente( $nivIndent )."<input class=\"form-control\" "
+        $html =  self::indente( $nivIndent ).'<div class="form-floating mt-3 mb-3">'
+                .self::indente( $nivIndent + 1 )."<input class=\"form-control\" "
                     ." type=\"$this->type\""
                     ." name=\"$this->name\"" 
                     ." id=\"$this->name\""
+                    ." value=\"$this->value\"" 
                     ." placeholder=\"$this->placeHolder\""
-                    . $this->readonly ?? ' readonly';        
+                    . ($this->readonly ? ' readonly' : '');        
         $html .= ">";
+        $html .= self::indente( $nivIndent + 1)."<label for=\"$this->label\">$this->label</label>";
+        $html .= self::indente( $nivIndent ).'</div>';
         return $html;
 
     }
