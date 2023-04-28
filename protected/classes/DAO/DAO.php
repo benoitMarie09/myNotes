@@ -6,7 +6,7 @@ class DAO
 {
     #region --- Attributs ----------------------------
     /** @var \PDO Connexion à la base de donnée. */
-    private static \PDO $db;
+    protected static \PDO $db;
     /** @var string Table de la base de donnée. */
     #endregion
 
