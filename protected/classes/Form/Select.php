@@ -9,8 +9,8 @@ class Select extends FormElement
 {
 
     #region --- Attibuts ---------------------
-    /** @var array $options Les options du selects */
-    private array $options;
+    /** @var SelectOption[] $options Les options du selects */
+    private $options;
     #endregion
 
 
@@ -27,10 +27,10 @@ class Select extends FormElement
     #region --- Methodes ---------------------
     public function rendre( $nivIndent )
     {
-        $html = self::indente( $nivIndent )."<select name=\"$this->name\" id=\"$this->name\">";
+        $html = self::indente( $nivIndent )."<select class=\"form-control\" name=\"$this->name\" id=\"$this->name\">";
         foreach( $this->options as $option )
         {
-            $html .= self::indente( $nivIndent + 1 )."<option value=\"$option\">$option</option>";
+            $html .= self::indente( $nivIndent + 1 )."<option value=\"$option->value\">$option->name</option>";
         }
         $html .= self::indente( $nivIndent )."</select>";
 

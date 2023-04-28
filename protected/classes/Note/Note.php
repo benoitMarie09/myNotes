@@ -8,7 +8,7 @@ class Note extends \HtmlElement
 
     #region --- Attributs -------------------------------
     /** @var int primary key de la note. */ 
-    private int $id;
+    public int $id;
     /** @var string Titre de la note. */
     public string $titre;
     /** @var string Descriptif de la note. */
@@ -45,13 +45,23 @@ class Note extends \HtmlElement
 
     public function rendre( $nivIndent )
     {
-        $html = self::indente( $nivIndent )."<td id=\"note_$this->id\" class=\"text-center\"  data-toggle=\"collapse\" data-target=\"#$this->id\">"
-                ."$this->titre <br>" 
-                .(isset( $this->idNote ) ? '<span class="blockquote-footer">'."Ref $this->idNote : "."<a href=\"#note_$this->idNote \">".$this->getRef()->titre.'</a>' .'</span>': '')
+        $html = self::indente( $nivIndent )."<td id=\"note_$this->id\">"
+                .self::indente( $nivIndent + 1 ).'<div class="d-flex justify-content-between">'
+                .self::indente( $nivIndent + 2 ).'<div>'
+                ."$this->titre" 
+                // Ajout de la déférence si il y en a une
+                .(isset( $this->idNote ) ? 
+                self::indente( $nivIndent + 2 ).' <br><span class="blockquote-footer">'
+                .   self::indente( $nivIndent + 3 )."Ref $this->idNote : "
+                .   self::indente( $nivIndent + 3 )."<a href=\"#note_$this->idNote \">".$this->getRef()->titre.'</a>' 
+                .self::indente( $nivIndent + 2 ).'</span>': '')
+                .self::indente( $nivIndent + 2 ).'</div>'
+                .self::indente( $nivIndent + 2 )."<button type =\"button\" class=\"btn btn-primary \" data-bs-toggle=\"collapse\" data-bs-target=\"#collapse-$this->id\"  aria-expanded=\"false\" aria-controls=\"collapse-$this->id\" >voir</button>"
+                .self::indente( $nivIndent + 1 ).'</div>'
+                .self::indente( $nivIndent + 2 )."<div id=\"collapse-$this->id\" class=\"collapse\">"
+                .   self::indente( $nivIndent + 3 ).$this->descriptif
+                .self::indente( $nivIndent + 2 )."</div>"
                 ."</td>";
-        $html .= self::indente( $nivIndent )."<div id=\"$this->id\" class=\"collapse\">"
-                .   self::indente( $nivIndent +1 ).$this->descriptif
-                .self::indente( $nivIndent )."</div>";
         return $html;
     }
     #endregion

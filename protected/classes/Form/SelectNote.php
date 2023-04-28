@@ -8,18 +8,19 @@ namespace Form;
 class SelectNote extends Select
 {
     # region --- Attributs -------------------------
-    /** @var \DAONote $TableNote Connexion à la table note de la base de données*/
-    private static \DAONote $tableNote;
+    /** @var \DAO\DAONote $TableNote Connexion à la table note de la base de données*/
+    private static \DAO\DAONote $tableNote;
     #endregion
 
     # region --- Constructeur -------------------------
     public function __construct( string $name, string $label, mixed $value )
     {
-        self::$tableNote = new \DAONote();
+        self::$tableNote = new \DAO\DAONote();
         $options = [];
-        foreach( self::$tableNote as $note )
+        foreach( self::$tableNote->getAll() as $note )
         {
-            array_push( $options, $note->titre );
+            $option = new SelectOption( $note->titre, $note->id );
+            array_push( $options, $option );
         };
         parent::__construct( $name, $label, $value, $options );
     }
