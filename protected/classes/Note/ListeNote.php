@@ -9,15 +9,15 @@ namespace Note;
 class ListeNote extends \HtmlElement
 {
     #region --- Attributs ------------------------------
-    /** @var \DAONote DAO de la table note de la base de données. */
-    private static \DAONote $dbNotes;
+    /** @var \DAO\DAONote DAO de la table note de la base de données. */
+    private static \DAO\DAONote $dbNotes;
     #endregion
 
     #region --- Construct ------------------------------
     /** Initialisation de la liste de notes */
     public function __construct()
     {
-        self::$dbNotes = new \DAONote();
+        self::$dbNotes = new \DAO\DAONote();
     }
     #endregion
 
