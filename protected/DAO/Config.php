@@ -1,4 +1,6 @@
 <?php
+
+namespace DAO;
 class Config
 {
     const BDD_SERVEUR = '127.0.0.1';
