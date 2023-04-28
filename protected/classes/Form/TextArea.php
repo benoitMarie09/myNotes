@@ -22,7 +22,7 @@ class TextArea extends FormElement
     public function rendre( $nivIndent )
     {
         $html = self::indente( $nivIndent )."<label for=\"$this->label\"></label>"
-                ."self::indente( $nivIndent ).<textarea name=\"$this->name\"></textarea>"
+                .self::indente( $nivIndent )."<textarea name=\"$this->name\"></textarea>"
                 .self::indente( $nivIndent )."<script>"
                     .self::indente( $nivIndent + 1 )."CKEDITOR.replace( '$this->name' )"
                 .self::indente( $nivIndent )."</script>";
