@@ -16,10 +16,10 @@ class InputNoteId extends Input
         parent::__construct( 
             name : 'id', 
             label : 'Note n°',
-            value : $this->note->count() + 1,
             type : 'number',
-            readonly : true,
         );
+        $this->setAttribut( 'readonly' );
+        $this->setValue( $this->note->count() + 1 );
     }
     #endregion
 }

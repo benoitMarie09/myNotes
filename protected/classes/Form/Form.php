@@ -43,5 +43,14 @@ class Form extends \HtmlElement
         $html .= self::indente( $nivIndent ).'</div>';
         return $html;
     }
+
+    public function getAllFromPost()
+    {
+        foreach ($this->formElements as $element) 
+        {
+            $requests[$element->name] = $element->getFromPost();
+        }
+        return $requests;
+    }
     #endregion
 }

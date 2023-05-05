@@ -12,9 +12,9 @@ class TextArea extends FormElement
     #endregion
 
     #region --- Constructeur ---------------------
-    public function __construct( $name, $label, $value )
+    public function __construct( $name, $label )
     {
-        parent::__construct( $name, $label, $value );
+        parent::__construct( $name, $label );
     }
     #endregion
 

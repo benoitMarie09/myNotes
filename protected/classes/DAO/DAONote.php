@@ -7,14 +7,6 @@ namespace DAO;
  */
 class DAONote extends DAO
 {
-
-    #region --- Constructeur -------------------------
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    #endregion
-
     #region --- Methodes -----------------------------
     /**
      * Création d'une note dans la base de donnée.
@@ -22,18 +14,21 @@ class DAONote extends DAO
      * @param ?string $desc Descriptif de la note.
      * @param ?int $id_note Id de la note de référence.
     */
-    public static function create( string $titre, string $descriptif=null, ?int $id_note=null )
+    public static function create( \Note\Note $note )
     {
+        if ( ! is_null( $note->id ) )
+        {
+            throw new \Exception( 'Impossible de créer la note car elle possède un id non null'  );
+        }
         try
         {
             $sql = 'INSERT INTO note ( titre, descriptif, id_note )
                             VALUES (:titre, :descriptif, :id_note)';
             $stmt = self::$db->prepare($sql);
-            $stmt->bindValue( 'titre', $titre, \PDO::PARAM_STR );
-            $stmt->bindValue( 'descriptif', $descriptif, \PDO::PARAM_STR );
-            $stmt->bindValue( 'id_note', $id_note, \PDO::PARAM_INT );
+            $stmt->bindValue( 'titre', $note->titre, \PDO::PARAM_STR );
+            $stmt->bindValue( 'descriptif', $note->descriptif, \PDO::PARAM_STR );
+            $stmt->bindValue( 'id_note', $note->idRef, \PDO::PARAM_INT );
             $stmt->execute();
-
         }
         catch (\PDOException $e) 
         {
@@ -54,7 +49,7 @@ class DAONote extends DAO
                         WHERE id = $id";
             $stmt = self::$db->query($sql);
             $result = $stmt->fetch( \PDO::FETCH_OBJ );
-            $note = new \Note\Note( $result->id, $result->titre, $result->descriptif, $result->id_note );
+            $note = new \Note\Note( $result->titre, $result->descriptif, $result->id, $result->id_note );
         }
         catch (\PDOException $e) 
         {
@@ -77,7 +72,7 @@ class DAONote extends DAO
             $notes = [];
             while( $result = $stmt->fetch( \PDO::FETCH_OBJ ) )
             {
-                $note = new \Note\Note( $result->id, $result->titre, $result->descriptif, $result->id_note );
+                $note = new \Note\Note( $result->titre, $result->descriptif, $result->id, $result->id_note );
                 array_push( $notes, $note );
             }
         }
@@ -92,7 +87,7 @@ class DAONote extends DAO
      * Compte le nombre d'élément de la table note.
      * @return int nombre délément de la table.
      */
-    public function count()
+    public function count() : int
     {
         $sql = "SELECT COUNT(id) as nb
                 FROM note";

@@ -11,7 +11,8 @@
 
 // Réception des données
 $titre      = $_REQUEST['titre'];
-$id_note    = (int)$_REQUEST['id_note'] ?? null;
+$idNote    = (int)$_REQUEST['id_note'] ?? null;
 $descriptif = $_REQUEST['descriptif'] ?? null;
 $daoNote = new DAO\DAONote();
-$daoNote->create( $titre, $descriptif, $id_note );
+$daoNote->create( new \Note\Note( titre: $titre, descriptif: $descriptif, idNote: $idNote ) );
+header("Location: ./index.php");

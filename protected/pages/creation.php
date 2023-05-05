@@ -7,14 +7,12 @@ $form->addElement( new Form\InputNoteId() );
 $form->addElement( new Form\Input( 
     name : 'titre',
     label : 'Titre',
-    value : '',
     type : 'text'
 ) );
-$form->addElement(new Form\SelectNote('id_note', 'Note de référence', ''));
+$form->addElement(new Form\SelectNote('id_note', 'Note de référence'));
 $form->addElement( new Form\TextArea(
     name :'descriptif',
     label : 'Déscriptif',
-    value : ''
 ) );
 
 echo $form->rendre( 1 );

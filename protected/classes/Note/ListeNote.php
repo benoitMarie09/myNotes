@@ -36,10 +36,10 @@ class ListeNote extends \HtmlElement
             // Ajout des table header
             $html .= 
             self::indente( $nivIndent + 2).'<main class="card-body">'
-            .   self::indente( $nivIndent + 3).'<table id="tableNote" class="table table-bordered">'
+            .   self::indente( $nivIndent + 3).'<table id="tableNote" class="table">'
             .      self::indente( $nivIndent + 4 ).'<thead class="thead-dark">'
             .        self::indente( $nivIndent + 5 ).'<tr>'
-            .          self::indente( $nivIndent + 6 ).'<th scope="col">'
+            .          self::indente( $nivIndent + 6 ).'<th scope="col" class="text-center th-sm ">'
             .              self::indente( $nivIndent + 7 ).'#'
             .          self::indente( $nivIndent + 6 ).'</th>'
             .          self::indente( $nivIndent + 6 ).'<th scope="col" class="text-center">'
@@ -54,8 +54,8 @@ class ListeNote extends \HtmlElement
             {   
                 $index = $key + 1;
                 $html .= 
-                self::indente( $nivIndent + 5 ).'<tr>'
-                .   self::indente( $nivIndent + 6 )."<th scope=\"row\">$index</th>"
+                self::indente( $nivIndent + 5 ).'<tr class="tableRow">'
+                .   self::indente( $nivIndent + 6 )."<th scope=\"row\" class = \"th-sm text-center\">$index</th>"
                 .   self::indente( $nivIndent + 6 ).$note->rendre( $nivIndent + 5 )
                 .self::indente( $nivIndent + 5 ).'</tr>';
             }

@@ -13,7 +13,7 @@ class SelectNote extends Select
     #endregion
 
     # region --- Constructeur -------------------------
-    public function __construct( string $name, string $label, mixed $value )
+    public function __construct( string $name, string $label)
     {
         self::$tableNote = new \DAO\DAONote();
         $options = [];
@@ -22,7 +22,7 @@ class SelectNote extends Select
             $option = new SelectOption( $note->titre, $note->id );
             array_push( $options, $option );
         };
-        parent::__construct( $name, $label, $value, $options );
+        parent::__construct( $name, $label, $options );
     }
     #endregion
 
